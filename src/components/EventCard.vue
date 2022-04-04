@@ -12,11 +12,13 @@
 
 <script>
 export default {
-  name: 'EventCard',
   props: {
-    event: Object,
-  },
-}
+    event: {
+      type: Object,
+      required: true
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -24,7 +26,7 @@ export default {
   padding: 20px;
   width: 250px;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid #39495c;
   margin-bottom: 18px;
 }
 

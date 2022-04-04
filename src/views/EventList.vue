@@ -24,41 +24,43 @@
 </template>
 
 <script>
-import EventCard from '@/components/EventCard.vue'
-import EventService from '@/services/EventService.js'
-import { watchEffect } from 'vue'
+import EventCard from "@/components/EventCard.vue";
+import EventService from "@/services/EventService.js";
+import { watchEffect } from "vue";
+
 export default {
-  name: 'EventList',
-  props: ['page'],
+  name: "EventList",
+  props: ["page"],
   components: {
-    EventCard,
+    EventCard
   },
   data() {
     return {
       events: null,
-      totalEvents: 0,
-    }
+      totalEvents: 0
+    };
   },
   created() {
     watchEffect(() => {
-      this.events = null
+      this.events = null;
       EventService.getEvents(2, this.page)
-        .then((response) => {
-          this.events = response.data
-          this.totalEvents = response.headers['x-total-count']
+        .then(response => {
+          this.events = response.data;
+          this.totalEvents = response.headers["x-total-count"];
         })
-        .catch((error) => {
-          console.log(error)
-        })
-    })
+        .catch(error => {
+          console.log(error);
+        });
+    });
   },
   computed: {
     hasNextPage() {
-      var totalPages = Math.ceil(this.totalEvents / 2)
-      return this.page < totalPages
-    },
-  },
-}
+      var totalPages = Math.ceil(this.totalEvents / 2);
+
+      return this.page < totalPages;
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -76,9 +78,11 @@ export default {
   text-decoration: none;
   color: #2c3e50;
 }
+
 #page-prev {
   text-align: left;
 }
+
 #page-next {
   text-align: right;
 }
